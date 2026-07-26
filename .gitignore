@@ -1,3 +1,4 @@
 .txt
 commands.txt
 node_modules
+.env
