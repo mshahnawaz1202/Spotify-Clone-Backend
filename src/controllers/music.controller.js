@@ -65,7 +65,38 @@ async function createAlbum(req, res) {
 
 
 }
+/**--------------------------------------------------------------------------------------------------------------- */
+/** get all musics saved in database  */
 
-module.exports = { createMusic, createAlbum }
+async function getAllMusic(req, res) {
+    const musics = await musicModel
+    .find()
+    .limit(2)
+    .populate("artist")
+    res.status(201).json({
+        message: "Musics Fetched Successfully!",
+        musics: musics
+    })
+
+}
+
+/**--------------------------------------------------------------------------------------------------------------- */
+async function getAllAlbums(req, res) {
+    const albums = await albumModel.find()
+        .populate("artist", "username email")
+        .populate("musics");
+
+    res.status(200).json({
+        message: "Albums fetched successfully!",
+        albums
+    });
+}
+
+module.exports = {
+    createMusic,
+    createAlbum,
+    getAllMusic,
+    getAllAlbums
+};
 
 
