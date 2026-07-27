@@ -10,6 +10,15 @@ const musicSchema = new mongoose.Schema({
         required:true,
     },
     artist: {
-        type:String,
+        type:mongoose.Schema.Types.ObjectId,
+        ref :"user",
+        required:true
     }
+
 })
+
+
+const musicModel = mongoose.model("music",musicSchema)
+
+
+module.exports = musicModel
