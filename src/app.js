@@ -1,5 +1,6 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
+const authRoutes = require('./routes/auth.routes')
 
 
 
@@ -9,7 +10,7 @@ app.use(cookieParser())
 
 
 
-
+app.use('/api/auth',authRoutes)
 
 
 
