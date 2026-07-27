@@ -25,4 +25,4 @@ async function uploadFile(buffer, originalName) {
   return result;
 }
 
-export default uploadFile;
+module.exports = { uploadFile }
