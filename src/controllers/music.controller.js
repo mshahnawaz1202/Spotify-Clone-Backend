@@ -13,9 +13,9 @@ async function createMusic(req, res) {
         })
     }
 
-
+    let decoded;
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        decoded = jwt.verify(token, process.env.JWT_SECRET)
         if (decoded.role !== "artist") {
             return res.status(403).json({
                 message: "Forbidden\n You don't have access to create music"
