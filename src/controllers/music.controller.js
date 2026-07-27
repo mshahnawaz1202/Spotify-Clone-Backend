@@ -32,7 +32,7 @@ async function createMusic(req, res) {
             file.buffer,
             file.originalname
         );
-        console.log(result);
+        // console.log(result);
 
         const music = await musicModel.create({
             uri: result.url,
