@@ -1,5 +1,42 @@
-
 <div align="center">
+
+<br/>
+
+<!-- HERO BANNER -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=1DB954&height=200&section=header&text=Spotify%20Clone%20Backend&fontSize=48&fontColor=ffffff&fontAlignY=38&desc=A%20Production-Ready%20RESTful%20Music%20Streaming%20API&descAlignY=60&descSize=18&animation=fadeIn" width="100%"/>
+
+<br/>
+
+<!-- TECH BADGES -->
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
+![ImageKit](https://img.shields.io/badge/ImageKit-009EF7?style=for-the-badge&logo=imagekit&logoColor=white)
+
+<br/>
+
+<!-- REPO STATS -->
+![GitHub repo size](https://img.shields.io/github/repo-size/mshahnawaz1202/Spotify-Clone-Backend?style=flat-square&color=1DB954&label=Repo%20Size)
+![GitHub last commit](https://img.shields.io/github/last-commit/mshahnawaz1202/Spotify-Clone-Backend?style=flat-square&color=1DB954&label=Last%20Commit)
+![GitHub top language](https://img.shields.io/github/languages/top/mshahnawaz1202/Spotify-Clone-Backend?style=flat-square&color=1DB954)
+![GitHub language count](https://img.shields.io/github/languages/count/mshahnawaz1202/Spotify-Clone-Backend?style=flat-square&color=1DB954&label=Languages)
+![GitHub stars](https://img.shields.io/github/stars/mshahnawaz1202/Spotify-Clone-Backend?style=flat-square&color=1DB954)
+![GitHub forks](https://img.shields.io/github/forks/mshahnawaz1202/Spotify-Clone-Backend?style=flat-square&color=1DB954)
+
+<br/>
+
+> **A full-featured Spotify-inspired music streaming backend** built with Node.js, Express, MongoDB & ImageKit.  
+> Handles user auth, role-based access control, cloud music uploads, and album management — all production-ready.
+
+<br/>
+
+[🚀 Quick Start](#️-installation) · [📡 API Docs](#-complete-api-documentation) · [🏗️ Architecture](#️-system-architecture) · [🤝 Contribute](#-contributing)
+
+<br/>
+
+</div>
 
 ---
 
@@ -44,17 +81,17 @@ The API supports two distinct user roles — **listeners** who stream music and 
 
 ## ✨ Features
 
-| Icon | Feature                             | Description                                                                             |
-| :--: | ----------------------------------- | --------------------------------------------------------------------------------------- |
-|  🔐  | **JWT Authentication**        | Stateless auth via signed tokens stored in HTTP-only cookies                            |
-|  🎭  | **Role-Based Access Control** | `user` and `artist` roles with dedicated middleware guards                          |
-|  🎵  | **Music Upload**              | Artists upload`.mp3` files streamed to ImageKit CDN via Multer memory storage         |
-|  📀  | **Album Management**          | Create albums by grouping existing tracks with artist ownership                         |
-|  🔍  | **Browse & Discover**         | Fetch all songs and albums with Mongoose`.populate()` for full relational data        |
-|  🔒  | **Password Security**         | `bcryptjs` hashing with 10 salt rounds — passwords never stored in plain text        |
-| ☁️ | **Cloud Storage**             | Audio files organized in ImageKit folders by type (`music/`, `videos/`, `files/`) |
-|  🍪  | **Cookie Sessions**           | Secure cookie-based token delivery — no`Authorization` header management needed      |
-|  🧱  | **MVC Architecture**          | Clean separation into Routes → Controllers → Models → Services                       |
+| Icon | Feature | Description |
+|:----:|---------|-------------|
+| 🔐 | **JWT Authentication** | Stateless auth via signed tokens stored in HTTP-only cookies |
+| 🎭 | **Role-Based Access Control** | `user` and `artist` roles with dedicated middleware guards |
+| 🎵 | **Music Upload** | Artists upload `.mp3` files streamed to ImageKit CDN via Multer memory storage |
+| 📀 | **Album Management** | Create albums by grouping existing tracks with artist ownership |
+| 🔍 | **Browse & Discover** | Fetch all songs and albums with Mongoose `.populate()` for full relational data |
+| 🔒 | **Password Security** | `bcryptjs` hashing with 10 salt rounds — passwords never stored in plain text |
+| ☁️ | **Cloud Storage** | Audio files organized in ImageKit folders by type (`music/`, `videos/`, `files/`) |
+| 🍪 | **Cookie Sessions** | Secure cookie-based token delivery — no `Authorization` header management needed |
+| 🧱 | **MVC Architecture** | Clean separation into Routes → Controllers → Models → Services |
 
 ---
 
@@ -74,38 +111,57 @@ The API supports two distinct user roles — **listeners** who stream music and 
 
 ## 🏗️ System Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                          CLIENT (Browser / App)                     │
-└────────────────────────────────┬────────────────────────────────────┘
-                                 │  HTTP Requests (with Cookie)
-                                 ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                        EXPRESS SERVER  :3000                        │
-│                                                                     │
-│   ┌─────────────┐    ┌──────────────────┐    ┌──────────────────┐  │
-│   │  Middleware │    │     Routes        │    │   Controllers    │  │
-│   │             │    │                  │    │                  │  │
-│   │ express.json│───▶│ /api/auth        │───▶│ auth.controller  │  │
-│   │ cookieParser│    │ /api/music       │    │ music.controller │  │
-│   │ authUser    │    │                  │    │                  │  │
-│   │ authArtist  │    └──────────────────┘    └────────┬─────────┘  │
-│   └─────────────┘                                     │            │
-└──────────────────────────────────────────────────────┼─────────────┘
-                                                        │
-                    ┌───────────────────────────────────┤
-                    │                                   │
-                    ▼                                   ▼
-     ┌──────────────────────────┐       ┌───────────────────────────┐
-     │       MongoDB Atlas      │       │      ImageKit CDN         │
-     │                          │       │                           │
-     │  ┌──────┐  ┌───────┐    │       │  /yt-complete-backend/    │
-     │  │ User │  │ Music │    │       │    ├── music/              │
-     │  └──────┘  └───────┘    │       │    ├── videos/            │
-     │       ┌─────────┐       │       │    └── files/             │
-     │       │  Album  │       │       │                           │
-     │       └─────────┘       │       └───────────────────────────┘
-     └──────────────────────────┘
+```mermaid
+flowchart TD
+    CLIENT(["🌐 Client\nBrowser · Mobile · Postman"])
+
+    subgraph SERVER["⚙️ Express Server  :3000"]
+        direction TB
+
+        subgraph MW["Middleware Layer"]
+            M1["express.json\nParse body"]
+            M2["cookie-parser\nRead JWT cookie"]
+            M3["authUser\nuser · artist"]
+            M4["🔒 authArtist\nartist only"]
+        end
+
+        subgraph ROUTES["Routes"]
+            R1["/api/auth\nregister · login · logout"]
+            R2["/api/music\nupload · album · GET"]
+        end
+
+        subgraph CTRL["Controllers"]
+            C1["auth.controller\nbcrypt · jwt · cookie"]
+            C2["music.controller\nupload · albums · populate"]
+        end
+    end
+
+    subgraph DB["🍃 MongoDB"]
+        U["👤 User\nusername · email · role"]
+        MS["🎵 Music\nuri · title · artist"]
+        AL["📀 Album\ntitle · musics · artist"]
+    end
+
+    IK(["☁️ ImageKit CDN\nmusic/ · videos/ · files/"])
+
+    CLIENT -->|"HTTP + Cookie"| MW
+    MW --> ROUTES
+    R1 --> C1
+    R2 --> C2
+    C1 -->|"Mongoose"| U
+    C2 -->|"Mongoose"| MS
+    C2 -->|"Mongoose"| AL
+    C2 -->|"Multer buffer"| IK
+    IK -->|"CDN url stored"| MS
+
+    style CLIENT fill:#1D9E75,color:#fff,stroke:#0F6E56
+    style SERVER fill:#F0F0FF,stroke:#AFA9EC,color:#3C3489
+    style DB fill:#EAF3DE,stroke:#97C459,color:#3B6D11
+    style IK fill:#FAEEDA,color:#854F0B,stroke:#EF9F27
+    style MW fill:#EEEDFE,stroke:#7F77DD,color:#3C3489
+    style ROUTES fill:#F1EFE8,stroke:#B4B2A9,color:#2C2C2A
+    style CTRL fill:#E6F1FB,stroke:#378ADD,color:#0C447C
+    style M4 fill:#FAECE7,stroke:#D85A30,color:#712B13
 ```
 
 ---
@@ -215,12 +271,12 @@ Spotify-Clone-Backend/
 
 Make sure the following are installed and ready before you begin:
 
-| Requirement                                                                                               | Version | Link                                                                            |
-| --------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------- |
-| ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)  | v18+    | [nodejs.org](https://nodejs.org/)                                                |
-| ![npm](https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white)                | v9+     | Comes with Node                                                                 |
-| ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)    | Any     | [mongodb.com](https://www.mongodb.com/) or [Atlas](https://www.mongodb.com/atlas) |
-| ![ImageKit](https://img.shields.io/badge/ImageKit-009EF7?style=flat-square&logo=imagekit&logoColor=white) | —      | [imagekit.io](https://imagekit.io/) (free tier works)                            |
+| Requirement | Version | Link |
+|-------------|---------|------|
+| ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) | v18+ | [nodejs.org](https://nodejs.org/) |
+| ![npm](https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white) | v9+ | Comes with Node |
+| ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white) | Any | [mongodb.com](https://www.mongodb.com/) or [Atlas](https://www.mongodb.com/atlas) |
+| ![ImageKit](https://img.shields.io/badge/ImageKit-009EF7?style=flat-square&logo=imagekit&logoColor=white) | — | [imagekit.io](https://imagekit.io/) (free tier works) |
 
 ### Setup
 
@@ -260,11 +316,11 @@ IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key_here
 <details>
 <summary><b>📋 Variable Reference</b></summary>
 
-| Variable                 | Required | Description                                                                                                | Example                               |
-| ------------------------ | :------: | ---------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| `DATABASE_URL`         |    ✅    | Full MongoDB connection URI                                                                                | `mongodb://localhost:27017/spotify` |
-| `JWT_SECRET`           |    ✅    | Signing secret for JWT tokens — keep this long and random                                                 | `x9kP2mQ7...`                       |
-| `IMAGEKIT_PRIVATE_KEY` |    ✅    | Private key from[ImageKit Dashboard → Developer Options](https://imagekit.io/dashboard/developer/api-keys) | `private_abc123...`                 |
+| Variable | Required | Description | Example |
+|----------|:--------:|-------------|---------|
+| `DATABASE_URL` | ✅ | Full MongoDB connection URI | `mongodb://localhost:27017/spotify` |
+| `JWT_SECRET` | ✅ | Signing secret for JWT tokens — keep this long and random | `x9kP2mQ7...` |
+| `IMAGEKIT_PRIVATE_KEY` | ✅ | Private key from [ImageKit Dashboard → Developer Options](https://imagekit.io/dashboard/developer/api-keys) | `private_abc123...` |
 
 > ⚠️ **Never commit your `.env` file.** Add it to `.gitignore` immediately.
 
@@ -302,7 +358,7 @@ Database Connected!
 
 ## 📡 Complete API Documentation
 
-> **Base URL:** `http://localhost:3000`
+> **Base URL:** `http://localhost:3000`  
 > **Auth:** Cookie-based. The `token` cookie is set automatically on login/register — just send `credentials: 'include'` from your client.
 
 ---
@@ -310,12 +366,11 @@ Database Connected!
 ### 🔐 Auth Endpoints — `/api/auth`
 
 <details>
-<summary><b>POST   /api/auth/register  —  Register a new user</b></summary>
+<summary><b>POST &nbsp; /api/auth/register &nbsp;—&nbsp; Register a new user</b></summary>
 
 **Auth Required:** ❌ None
 
 **Request Body:**
-
 ```json
 {
   "username": "johndoe",
@@ -325,15 +380,14 @@ Database Connected!
 }
 ```
 
-| Field        | Type       | Required | Notes                                |
-| ------------ | ---------- | :------: | ------------------------------------ |
-| `username` | `string` |    ✅    | Must be unique                       |
-| `email`    | `string` |    ✅    | Must be unique                       |
-| `password` | `string` |    ✅    | Stored as bcrypt hash                |
-| `role`     | `string` |    ❌    | `"user"` (default) or `"artist"` |
+| Field | Type | Required | Notes |
+|-------|------|:--------:|-------|
+| `username` | `string` | ✅ | Must be unique |
+| `email` | `string` | ✅ | Must be unique |
+| `password` | `string` | ✅ | Stored as bcrypt hash |
+| `role` | `string` | ❌ | `"user"` (default) or `"artist"` |
 
 **Success Response — `201 Created`:**
-
 ```json
 {
   "message": "User Created Successfully!",
@@ -347,7 +401,6 @@ Database Connected!
 ```
 
 **Error Response — `400 Bad Request`:**
-
 ```json
 {
   "message": "User Already exists"
@@ -361,12 +414,11 @@ Database Connected!
 ---
 
 <details>
-<summary><b>POST   /api/auth/login  —  Login with existing credentials</b></summary>
+<summary><b>POST &nbsp; /api/auth/login &nbsp;—&nbsp; Login with existing credentials</b></summary>
 
 **Auth Required:** ❌ None
 
 **Request Body:**
-
 ```json
 {
   "username": "johndoe",
@@ -377,7 +429,6 @@ Database Connected!
 > You can use either `username` or `email` in the body — the query runs an `$or` match.
 
 **Success Response — `201 Created`:**
-
 ```json
 {
   "message": "User Logged In Successfully!",
@@ -391,7 +442,6 @@ Database Connected!
 ```
 
 **Error Responses:**
-
 ```json
 { "message": "Invalid Credentials" }   // user not found — 401
 { "message": "Invalid Password" }      // wrong password — 401
@@ -404,14 +454,13 @@ Database Connected!
 ---
 
 <details>
-<summary><b>POST   /api/auth/logout  —  End the current session</b></summary>
+<summary><b>POST &nbsp; /api/auth/logout &nbsp;—&nbsp; End the current session</b></summary>
 
 **Auth Required:** ❌ None (but cookie must exist to have effect)
 
 **Request Body:** None
 
 **Success Response — `201 Created`:**
-
 ```json
 {
   "message": "User Logged Out Successfully!"
@@ -427,20 +476,19 @@ Database Connected!
 ### 🎵 Music Endpoints — `/api/music`
 
 <details>
-<summary><b>POST   /api/music/upload  —  Upload a new track</b></summary>
+<summary><b>POST &nbsp; /api/music/upload &nbsp;—&nbsp; Upload a new track</b></summary>
 
-**Auth Required:** 🎤 **Artist only**
+**Auth Required:** 🎤 **Artist only**  
 **Content-Type:** `multipart/form-data`
 
 **Form Fields:**
 
-| Field     | Type       | Required | Notes                     |
-| --------- | ---------- | :------: | ------------------------- |
-| `title` | `string` |    ✅    | Display name of the track |
-| `music` | `file`   |    ✅    | `.mp3` audio file       |
+| Field | Type | Required | Notes |
+|-------|------|:--------:|-------|
+| `title` | `string` | ✅ | Display name of the track |
+| `music` | `file` | ✅ | `.mp3` audio file |
 
 **Success Response — `201 Created`:**
-
 ```json
 {
   "message": "Music created successfully",
@@ -454,7 +502,6 @@ Database Connected!
 ```
 
 **Error Responses:**
-
 ```json
 { "message": "Unauthorized!" }                                  // 401 — no token
 { "message": "Forbidden\n You don't have access to create music" }  // 403 — not artist
@@ -465,12 +512,11 @@ Database Connected!
 ---
 
 <details>
-<summary><b>POST   /api/music/album  —  Create a new album</b></summary>
+<summary><b>POST &nbsp; /api/music/album &nbsp;—&nbsp; Create a new album</b></summary>
 
 **Auth Required:** 🎤 **Artist only**
 
 **Request Body:**
-
 ```json
 {
   "title": "My Debut Album",
@@ -482,13 +528,12 @@ Database Connected!
 }
 ```
 
-| Field        | Type         | Required | Notes                                 |
-| ------------ | ------------ | :------: | ------------------------------------- |
-| `title`    | `string`   |    ✅    | Album display name                    |
-| `musicIds` | `string[]` |    ✅    | Array of existing Music`_id` values |
+| Field | Type | Required | Notes |
+|-------|------|:--------:|-------|
+| `title` | `string` | ✅ | Album display name |
+| `musicIds` | `string[]` | ✅ | Array of existing Music `_id` values |
 
 **Success Response — `201 Created`:**
-
 ```json
 {
   "message": "Music Album created successfully",
@@ -506,14 +551,13 @@ Database Connected!
 ---
 
 <details>
-<summary><b>GET   /api/music/  —  Fetch all tracks</b></summary>
+<summary><b>GET &nbsp; /api/music/ &nbsp;—&nbsp; Fetch all tracks</b></summary>
 
 **Auth Required:** 👤 **Any authenticated user**
 
 **Request Body:** None
 
 **Success Response — `201 Created`:**
-
 ```json
 {
   "message": "Musics Fetched Successfully!",
@@ -540,14 +584,13 @@ Database Connected!
 ---
 
 <details>
-<summary><b>GET   /api/music/album  —  Fetch all albums</b></summary>
+<summary><b>GET &nbsp; /api/music/album &nbsp;—&nbsp; Fetch all albums</b></summary>
 
 **Auth Required:** 👤 **Any authenticated user**
 
 **Request Body:** None
 
 **Success Response — `200 OK`:**
-
 ```json
 {
   "message": "Albums fetched successfully!",
@@ -578,46 +621,63 @@ Database Connected!
 
 ### 📋 API Quick Reference
 
-|  Method  | Endpoint               | Description          |   Auth   |
-| :------: | ---------------------- | -------------------- | :-------: |
-| `POST` | `/api/auth/register` | Register new account |    ❌    |
-| `POST` | `/api/auth/login`    | Login & get cookie   |    ❌    |
-| `POST` | `/api/auth/logout`   | Clear session cookie |    ❌    |
-| `POST` | `/api/music/upload`  | Upload a music track | 🎤 Artist |
-| `POST` | `/api/music/album`   | Create an album      | 🎤 Artist |
-| `GET` | `/api/music/`        | Get all tracks       |  👤 User  |
-| `GET` | `/api/music/album`   | Get all albums       |  👤 User  |
+| Method | Endpoint | Description | Auth |
+|:------:|----------|-------------|:----:|
+| `POST` | `/api/auth/register` | Register new account | ❌ |
+| `POST` | `/api/auth/login` | Login & get cookie | ❌ |
+| `POST` | `/api/auth/logout` | Clear session cookie | ❌ |
+| `POST` | `/api/music/upload` | Upload a music track | 🎤 Artist |
+| `POST` | `/api/music/album` | Create an album | 🎤 Artist |
+| `GET` | `/api/music/` | Get all tracks | 👤 User |
+| `GET` | `/api/music/album` | Get all albums | 👤 User |
 
 ---
 
 ## 🔐 Authentication Flow
 
+```mermaid
+sequenceDiagram
+    autonumber
+    actor C  as Client
+    participant S  as Express Server
+    participant MW as Auth Middleware
+    participant DB as MongoDB
+    participant CK as Cookie
+
+    rect rgb(234, 243, 222)
+        Note over C,CK: Login / Register
+        C->>S: POST /api/auth/login { username, password }
+        S->>DB: findOne({ $or: [username, email] })
+        DB-->>S: user document
+        S->>S: bcrypt.compare(password, hash)
+        S->>S: jwt.sign({ id, role }, JWT_SECRET)
+        S->>CK: res.cookie("token", jwt)
+        S-->>C: 201 · { user: { id, username, role } }
+    end
+
+    rect rgb(230, 241, 251)
+        Note over C,CK: Protected Request
+        C->>MW: GET /api/music/ (Cookie: token=JWT)
+        MW->>MW: jwt.verify(token, JWT_SECRET)
+        alt valid token · correct role
+            MW->>S: next() → Controller
+            S->>DB: musicModel.find().populate("artist")
+            DB-->>S: music documents
+            S-->>C: 200 · { musics: [...] }
+        else invalid token
+            MW-->>C: 401 Unauthorized
+        else wrong role (e.g. user hits artist route)
+            MW-->>C: 403 Forbidden
+        end
+    end
 ```
-  REGISTER / LOGIN                  PROTECTED REQUEST
-  ─────────────────                 ──────────────────
 
-  Client                            Client
-    │                                 │
-    │  POST /api/auth/login            │  GET /api/music/
-    │  { username, password }          │  Cookie: token=<JWT>
-    ▼                                 ▼
-  Server                            Auth Middleware
-    │                                 │
-    ├─ Find user in MongoDB           ├─ Extract token from req.cookies
-    ├─ bcrypt.compare(password, hash) ├─ jwt.verify(token, JWT_SECRET)
-    ├─ jwt.sign({ id, role })         ├─ Check role (user | artist)
-    ├─ res.cookie('token', jwt)       │
-    └─ Return user data               ├─ PASS ──▶ next() ──▶ Controller
-                                      │
-                                      └─ FAIL ──▶ 401 / 403 Response
+**Role guards at a glance:**
 
-
-  ROLE GUARDS
-  ───────────
-
-  authUser    ──  allows role: "user"   OR  "artist"
-  authArtist  ──  allows role: "artist" ONLY
-```
+| Middleware | Allows |
+|------------|--------|
+| `authUser` | `role: "user"` and `role: "artist"` |
+| `authArtist` | `role: "artist"` only |
 
 ---
 
@@ -659,39 +719,6 @@ Database Connected!
 
 ---
 
-## 📊 Entity Relationship Diagram
-
-```
-┌───────────────────┐          ┌───────────────────┐
-│       USER        │          │       MUSIC        │
-│───────────────────│          │───────────────────-│
-│ _id          (PK) │◄────────┤ artist       (FK)  │
-│ username          │  1    N  │ _id          (PK)  │
-│ email             │          │ uri               │
-│ password          │          │ title             │
-│ role              │          └─────────┬──────────┘
-└─────────┬─────────┘                    │ N
-          │ 1                            │
-          │                              │
-          │ N         ┌──────────────────┘
-          │           │
-          │      ┌────▼──────────────┐
-          └─────▶│      ALBUM        │
-            1  N │───────────────────│
-                 │ _id          (PK) │
-                 │ title             │
-                 │ artist      (FK)  │
-                 │ musics[]   (FK[]) │
-                 └───────────────────┘
-```
-
-**Relationships:**
-
-- One `User` (artist) → Many `Music` tracks
-- One `User` (artist) → Many `Albums`
-- One `Album` → Many `Music` tracks (via `musics[]` array)
-
----
 
 ## 🧪 API Testing
 
@@ -712,7 +739,6 @@ You can test all endpoints using any HTTP client. Here are ready-to-use examples
 <summary><b>🖥️ cURL Examples</b></summary>
 
 **Register:**
-
 ```bash
 curl -X POST http://localhost:3000/api/auth/register \
   -H "Content-Type: application/json" \
@@ -721,7 +747,6 @@ curl -X POST http://localhost:3000/api/auth/register \
 ```
 
 **Login:**
-
 ```bash
 curl -X POST http://localhost:3000/api/auth/login \
   -H "Content-Type: application/json" \
@@ -730,14 +755,12 @@ curl -X POST http://localhost:3000/api/auth/login \
 ```
 
 **Get All Music (with cookie):**
-
 ```bash
 curl http://localhost:3000/api/music/ \
   -b cookies.txt
 ```
 
 **Upload a Track (artist only):**
-
 ```bash
 curl -X POST http://localhost:3000/api/music/upload \
   -b cookies.txt \
@@ -746,7 +769,6 @@ curl -X POST http://localhost:3000/api/music/upload \
 ```
 
 **Create an Album:**
-
 ```bash
 curl -X POST http://localhost:3000/api/music/album \
   -b cookies.txt \
@@ -755,7 +777,6 @@ curl -X POST http://localhost:3000/api/music/album \
 ```
 
 **Logout:**
-
 ```bash
 curl -X POST http://localhost:3000/api/auth/logout \
   -b cookies.txt -c cookies.txt
@@ -767,16 +788,16 @@ curl -X POST http://localhost:3000/api/auth/logout \
 
 ## 🔒 Security Features
 
-| Feature                 | Implementation                                              | Status |
-| ----------------------- | ----------------------------------------------------------- | :----: |
-| Password Hashing        | `bcryptjs` with 10 salt rounds                            |   ✅   |
-| JWT Signing             | `jsonwebtoken` with secret from env                       |   ✅   |
-| Cookie Token Storage    | `res.cookie('token', jwt)` — avoids XSS via localStorage |   ✅   |
-| Role Authorization      | Middleware-level role checks before controller runs         |   ✅   |
-| Secret Externalization  | All keys in`.env`, never hardcoded                        |   ✅   |
-| No Plain Text Passwords | Hash comparison via`bcrypt.compare()`                     |   ✅   |
-| File Type Routing       | ImageKit folder separation by file extension                |   ✅   |
-| Memory-based Upload     | Multer`memoryStorage()` — no temp files on disk          |   ✅   |
+| Feature | Implementation | Status |
+|---------|---------------|:------:|
+| Password Hashing | `bcryptjs` with 10 salt rounds | ✅ |
+| JWT Signing | `jsonwebtoken` with secret from env | ✅ |
+| Cookie Token Storage | `res.cookie('token', jwt)` — avoids XSS via localStorage | ✅ |
+| Role Authorization | Middleware-level role checks before controller runs | ✅ |
+| Secret Externalization | All keys in `.env`, never hardcoded | ✅ |
+| No Plain Text Passwords | Hash comparison via `bcrypt.compare()` | ✅ |
+| File Type Routing | ImageKit folder separation by file extension | ✅ |
+| Memory-based Upload | Multer `memoryStorage()` — no temp files on disk | ✅ |
 
 > 🔧 **Recommended additions for production:** Add `httpOnly: true, secure: true, sameSite: 'strict'` flags to `res.cookie()`, add rate limiting via `express-rate-limit`, and add CORS config via `cors` package.
 
@@ -850,19 +871,19 @@ This project was built to demonstrate and sharpen real-world backend skills that
 
 ## 🔮 Future Improvements
 
-| Priority | Feature                                                                                 |
-| :-------: | --------------------------------------------------------------------------------------- |
-|  🔴 High  | Add`httpOnly`, `secure`, and `sameSite` flags to JWT cookie                       |
-|  🔴 High  | Wrap controllers in`try/catch` — currently unhandled rejections can crash the server |
-| 🟠 Medium | Add`express-rate-limit` on auth routes to prevent brute-force                         |
-| 🟠 Medium | Add`cors` package and configure allowed origins                                       |
-| 🟠 Medium | Remove the`.limit(2)` cap on `getAllMusic()`                                        |
-| 🟡 Normal | Add pagination (`page` + `limit` query params) to music and album routes            |
-| 🟡 Normal | Add song duration, cover art upload, and genre fields to the Music model                |
-| 🟡 Normal | Add a`PATCH /api/music/:id` and `DELETE /api/music/:id` for artists                 |
-|  🟢 Low  | Add search endpoint —`GET /api/music/search?q=`                                      |
-|  🟢 Low  | Add a playlist model with user ownership                                                |
-|  🟢 Low  | Write unit tests with Jest + Supertest                                                  |
+| Priority | Feature |
+|:--------:|---------|
+| 🔴 High | Add `httpOnly`, `secure`, and `sameSite` flags to JWT cookie |
+| 🔴 High | Wrap controllers in `try/catch` — currently unhandled rejections can crash the server |
+| 🟠 Medium | Add `express-rate-limit` on auth routes to prevent brute-force |
+| 🟠 Medium | Add `cors` package and configure allowed origins |
+| 🟠 Medium | Remove the `.limit(2)` cap on `getAllMusic()` |
+| 🟡 Normal | Add pagination (`page` + `limit` query params) to music and album routes |
+| 🟡 Normal | Add song duration, cover art upload, and genre fields to the Music model |
+| 🟡 Normal | Add a `PATCH /api/music/:id` and `DELETE /api/music/:id` for artists |
+| 🟢 Low | Add search endpoint — `GET /api/music/search?q=` |
+| 🟢 Low | Add a playlist model with user ownership |
+| 🟢 Low | Write unit tests with Jest + Supertest |
 
 ---
 
@@ -890,7 +911,7 @@ git push origin feature/AmazingFeature
 # Step 6: Open a Pull Request on GitHub 🎉
 ```
 
-**Commit message convention:**
+**Commit message convention:**  
 Use prefixes like `feat:`, `fix:`, `docs:`, `refactor:`, `test:` for clear history.
 
 ---
@@ -899,10 +920,21 @@ Use prefixes like `feat:`, `fix:`, `docs:`, `refactor:`, `test:` for clear histo
 
 <div align="center">
 
+<br/>
+
+<img src="https://avatars.githubusercontent.com/u/210239811?v=4" width="100" style="border-radius: 50%"/>
+
+<br/>
+
+**mshahnawaz1202**
+
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mshahnawaz1202)
+
+*Built with ❤️ and a lot of `console.log` debugging*
+
+<br/>
+
+</div>
+
 ---
 
-## ⭐ Support
-
-If this project helped you learn something or saved you time, consider giving it a star — it means a lot and helps others discover it!
-
-<div align="center">
